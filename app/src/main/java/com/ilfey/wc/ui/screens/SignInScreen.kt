@@ -62,12 +62,13 @@ fun SignInScreen(navController: NavController) {
             ConfirmButton(text = "Войти") {
 //                TODO create sign in
                 val correctEmail = validateEmail(email)
-                Log.d("[Validator]","email is $correctEmail")
+                Log.d("[Validator]", "email is $correctEmail")
 
                 if (!correctEmail) {
                     Toast.makeText(ctx, "Введите правильный E-mail", Toast.LENGTH_SHORT).show()
                 }
-
+//                FIXME auth
+                navController.navigate(Routes.MainScreen.route)
             }
             ScipButton(text = "Регистрация") {
                 navController.navigate(Routes.SignUpScreen.route)

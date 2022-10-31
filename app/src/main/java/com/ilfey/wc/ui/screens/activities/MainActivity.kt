@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.ilfey.wc.R
 import com.ilfey.wc.navigation.Routes
 import com.ilfey.wc.ui.components.sign_in.SignInScreen
+import com.ilfey.wc.ui.screens.MainScreen
 import com.ilfey.wc.ui.screens.SignUpScreen
 import com.ilfey.wc.ui.theme.WorldCinemaTheme
 
@@ -27,6 +28,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     composable(Routes.SignInScreen.route) { SignInScreen(navController = navController) }
                     composable(Routes.SignUpScreen.route) { SignUpScreen(navController = navController) }
+                    composable(Routes.MainScreen.route) { MainScreen() }
                 }
             }
         }

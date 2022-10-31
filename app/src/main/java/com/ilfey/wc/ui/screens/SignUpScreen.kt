@@ -79,7 +79,7 @@ fun SignUpScreen(navController: NavController) {
             ConfirmButton(text = "Зарегистрироваться") {
 //                TODO create registration
                 val correctEmail = validateEmail(email)
-                Log.d("[Validator]","email is $correctEmail")
+                Log.d("[Validator]", "email is $correctEmail")
 
                 if (!correctEmail) {
                     Toast.makeText(ctx, "Введите правильный E-mail", Toast.LENGTH_SHORT).show()

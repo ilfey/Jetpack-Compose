@@ -8,9 +8,9 @@ import androidx.compose.ui.Modifier
 import com.ilfey.wc.ui.theme.Shapes
 
 @Composable
-fun ConfirmButton(text: String, onClick: () -> Unit) {
+fun ConfirmButton(text: String, modifier: Modifier = Modifier.fillMaxWidth(), onClick: () -> Unit) {
     Button(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier,
         onClick = onClick,
         shape = Shapes.small,
     ) {
