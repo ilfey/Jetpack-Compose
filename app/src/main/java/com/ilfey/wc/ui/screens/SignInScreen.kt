@@ -1,18 +1,20 @@
-package com.ilfey.wc.ui.components.sign_in
+package com.ilfey.wc.ui.screens
 
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.ilfey.wc.R
-import com.ilfey.wc.navigation.Routes
+import com.ilfey.wc.navigation.AuthRoutes
+import com.ilfey.wc.ui.activities.MainActivity
 import com.ilfey.wc.ui.components.BaseTextFiled
 import com.ilfey.wc.ui.components.ConfirmButton
 import com.ilfey.wc.ui.components.PasswordTextField
@@ -20,7 +22,7 @@ import com.ilfey.wc.ui.components.ScipButton
 import com.ilfey.wc.util.validateEmail
 
 @Composable
-fun SignInScreen(navController: NavController) {
+fun SignInScreen(callback: (String) -> Unit) {
     val ctx = LocalContext.current
 
     var email by remember { mutableStateOf("") }
@@ -67,11 +69,15 @@ fun SignInScreen(navController: NavController) {
                 if (!correctEmail) {
                     Toast.makeText(ctx, "Введите правильный E-mail", Toast.LENGTH_SHORT).show()
                 }
+
 //                FIXME auth
-                navController.navigate(Routes.MainScreen.route)
+                val intent = Intent(ctx, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                ctx.startActivity(intent)
             }
             ScipButton(text = "Регистрация") {
-                navController.navigate(Routes.SignUpScreen.route)
+                callback(AuthRoutes.SignUpScreen.route)
             }
         }
     }

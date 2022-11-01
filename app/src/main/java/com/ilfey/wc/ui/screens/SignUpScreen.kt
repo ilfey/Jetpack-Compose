@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.ilfey.wc.R
+import com.ilfey.wc.navigation.AuthRoutes
 import com.ilfey.wc.ui.components.BaseTextFiled
 import com.ilfey.wc.ui.components.ConfirmButton
 import com.ilfey.wc.ui.components.PasswordTextField
@@ -19,7 +19,7 @@ import com.ilfey.wc.ui.components.ScipButton
 import com.ilfey.wc.util.validateEmail
 
 @Composable
-fun SignUpScreen(navController: NavController) {
+fun SignUpScreen(callback: (String) -> Unit) {
     val ctx = LocalContext.current
 
     var name by remember { mutableStateOf("") }
@@ -84,9 +84,10 @@ fun SignUpScreen(navController: NavController) {
                 if (!correctEmail) {
                     Toast.makeText(ctx, "Введите правильный E-mail", Toast.LENGTH_SHORT).show()
                 }
+                callback(AuthRoutes.SignInScreen.route)
             }
             ScipButton(text = "У меня уже есть аккаунт") {
-                navController.popBackStack()
+                callback(AuthRoutes.SignInScreen.route)
             }
         }
     }
