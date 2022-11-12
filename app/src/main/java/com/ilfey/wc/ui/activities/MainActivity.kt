@@ -6,20 +6,18 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Text
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.ilfey.wc.navigation.BottomNavRoutes
 import com.ilfey.wc.ui.components.navigation.MainScreenNavigationConfiguration
 import com.ilfey.wc.ui.theme.WorldCinemaTheme
+import com.ilfey.wc.ui.theme.navBarColor
+import com.ilfey.wc.ui.theme.navBarItemColors
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +25,13 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val navController = rememberNavController()
+            val systemUiController = rememberSystemUiController()
             WorldCinemaTheme {
+                SideEffect {
+                    systemUiController.setNavigationBarColor(
+                        color = Color(0xFF1C1A19)
+                    )
+                }
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.SpaceBetween
@@ -42,7 +46,10 @@ class MainActivity : ComponentActivity() {
                         BottomNavRoutes.ProfileScreen,
                     )
 
-                    NavigationBar {
+                    NavigationBar(
+                        containerColor = navBarColor,
+                        contentColor = navBarColor,
+                    ) {
                         screens.forEachIndexed { index, page ->
                             NavigationBarItem(
                                 icon = {
@@ -59,7 +66,8 @@ class MainActivity : ComponentActivity() {
                                 onClick = {
                                     currentScreen = index
                                     navController.navigate(page.route)
-                                }
+                                },
+                                colors = navBarItemColors()
                             )
                         }
                     }
