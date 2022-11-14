@@ -8,13 +8,14 @@ val primary = Color(0xFFEF3A01)
 val secondary = Color(0xFFFFFFFF)
 val tertiary = Color(0xFFFFFFFF)
 
-val background = Color(0xFFFFFBFE)
+val background = Color(0xFF332973)
 val surface = Color(0xFFFFFBFE)
 val onPrimary = Color(0xFFFFFFFF)
 val onSecondary = Color(0xFFFFFFFF)
 val onTertiary = Color(0xFFFFFFFF)
 val onBackground = Color(0xFF1C1B1F)
 val onSurface = Color(0xFF1C1B1F)
+val tabsContainer = Color(0x0AC4C4C4)
 
 
 @Composable
