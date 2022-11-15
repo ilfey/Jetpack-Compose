@@ -16,7 +16,8 @@ import com.ilfey.wc.ui.theme.WorldCinemaTheme
 import com.ilfey.wc.ui.theme.navBarColor
 import com.ilfey.wc.ui.theme.navBarItemColors
 
-@ExperimentalMaterial3Api
+
+@OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
