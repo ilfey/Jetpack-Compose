@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
 import com.ilfey.wc.tabs.TabItem
-import com.ilfey.wc.ui.components.FilmAdv
+import com.ilfey.wc.ui.components.MovieAdv
 import com.ilfey.wc.ui.components.Tabs
 import com.ilfey.wc.ui.components.TabsContent
 import com.ilfey.wc.ui.theme.background
@@ -22,7 +22,6 @@ import com.ilfey.wc.ui.theme.primary
 @Preview
 @Composable
 fun MainScreen() {
-
     val tabs = listOf(
         TabItem.InTrends,
         TabItem.New,
@@ -31,7 +30,7 @@ fun MainScreen() {
     val pagerState = rememberPagerState()
     LazyColumn {
         item {
-            FilmAdv()
+            MovieAdv()
         }
 
         item {
