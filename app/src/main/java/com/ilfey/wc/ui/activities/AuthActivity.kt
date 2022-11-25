@@ -7,7 +7,9 @@ import androidx.navigation.compose.rememberNavController
 import com.ilfey.wc.R
 import com.ilfey.wc.ui.components.navigation.AuthScreenNavigationConfiguration
 import com.ilfey.wc.ui.theme.WorldCinemaTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AuthActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

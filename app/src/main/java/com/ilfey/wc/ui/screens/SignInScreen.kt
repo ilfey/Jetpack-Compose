@@ -14,18 +14,24 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.ilfey.wc.R
 import com.ilfey.wc.navigation.AuthRoutes
+import com.ilfey.wc.network.model.LoginBody
 import com.ilfey.wc.ui.activities.MainActivity
 import com.ilfey.wc.ui.components.BaseTextFiled
 import com.ilfey.wc.ui.components.ConfirmButton
 import com.ilfey.wc.ui.components.PasswordTextField
 import com.ilfey.wc.ui.components.ScipButton
 import com.ilfey.wc.util.validateEmail
+import com.ilfey.wc.viewmodel.SignInViewModel
+import okhttp3.internal.userAgent
 
 @Composable
-fun SignInScreen(callback: (String) -> Unit) {
+fun SignInScreen(
+    viewModel: SignInViewModel,
+    callback: (String) -> Unit
+) {
     val ctx = LocalContext.current
 
-    var email by remember { mutableStateOf("") }
+    var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
     Column(
@@ -46,8 +52,8 @@ fun SignInScreen(callback: (String) -> Unit) {
         Column(
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            BaseTextFiled(label = "E-mail", value = email) {
-                email = it
+            BaseTextFiled(label = "Логин", value = username) {
+                username = it
             }
 
             PasswordTextField(
@@ -62,19 +68,28 @@ fun SignInScreen(callback: (String) -> Unit) {
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             ConfirmButton(text = "Войти") {
-//                TODO create sign in
-                val correctEmail = validateEmail(email)
-                Log.d("[Validator]", "email is $correctEmail")
+//                TODO check connection
 
-                if (!correctEmail) {
-                    Toast.makeText(ctx, "Введите правильный E-mail", Toast.LENGTH_SHORT).show()
+                viewModel.login(
+                    LoginBody(
+                        username = username,
+                        password = password,
+                    )
+                ) {
+                    if (it) {
+                        val intent = Intent(ctx, MainActivity::class.java)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                        ctx.startActivity(intent)
+                    } else {
+                        Toast.makeText(
+                            ctx,
+                            "Проверьте правильность логина и пароля.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
-
-//                FIXME auth
-                val intent = Intent(ctx, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                ctx.startActivity(intent)
             }
             ScipButton(text = "Регистрация") {
                 callback(AuthRoutes.SignUpScreen.route)

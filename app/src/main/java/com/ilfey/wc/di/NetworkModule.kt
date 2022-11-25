@@ -48,7 +48,6 @@ object NetworkModule {
                         ConnectivityManager.TYPE_ETHERNET -> true
                         else -> false
                     }
-
                 }
             }
         }
@@ -69,5 +68,4 @@ object NetworkModule {
             .build()
             .create(WDAppService::class.java)
     }
-
 }

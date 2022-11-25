@@ -2,13 +2,14 @@ package com.ilfey.wc.ui.components.navigation
 
 import com.ilfey.wc.navigation.AuthRoutes
 import com.ilfey.wc.ui.screens.SignInScreen
-
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.ilfey.wc.navigation.BottomNavRoutes
 import com.ilfey.wc.ui.screens.*
+import com.ilfey.wc.viewmodel.SignInViewModel
 
 
 @Composable
@@ -21,7 +22,11 @@ fun AuthScreenNavigationConfiguration(
     ) {
 
         composable(AuthRoutes.SignInScreen.route) {
-            SignInScreen {
+            val viewModel = hiltViewModel<SignInViewModel>()
+
+            SignInScreen(
+                viewModel = viewModel
+            ) {
                 navHostController.navigate(it) {
                     launchSingleTop = true
                 }
