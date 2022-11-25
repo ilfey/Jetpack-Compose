@@ -1,5 +1,7 @@
 package com.ilfey.wc
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-class WCApplication : Application() {}
+@HiltAndroidApp
+class WCApplication : Application()
